@@ -149,7 +149,7 @@ a {
 .container__content--heading {
   display: inline-block;
   text-align: center;
-  padding: 5rem 0;
+  padding: 2rem 0;
   font-size: 4rem;
   font-weight: 300;
   text-transform: uppercase;
@@ -157,7 +157,7 @@ a {
   text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6);
   letter-spacing: 2px;
   transition: all 0.2s;
-  animation: moveInTop 1s ease-out;
+  animation: moveInTop 2s ease-out;
 }
 
 .container__content--heading:hover {
@@ -166,7 +166,7 @@ a {
 }
 
 .container__content--box {
-  padding: 5rem 3rem;
+  padding: 3rem 3rem;
 }
 
 .container__content--item {
@@ -179,6 +179,7 @@ a {
   overflow: hidden;
   cursor: pointer;
   transition: all 0.2s ease;
+  animation: moveInTop 2s ease-out;
 }
 
 .container__content--item:hover {
@@ -483,6 +484,7 @@ a {
 .error__box--message {
   font-size: 3rem;
   padding-bottom: 4rem;
+  animation: moveInTop 1s ease-out;
 }
 
 .error__box--img {
@@ -491,6 +493,7 @@ a {
   border-radius: 60px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  animation: moveInTop 1s ease-out;
 }
 
 /* Queries */
@@ -652,6 +655,18 @@ a {
   opacity: 0;
   visibility: hidden;
   display: none;
+}
+
+.u-padding-top {
+  padding-top: 2rem;
+}
+
+.u-trailer-img {
+  display: block;
+  margin: 0 auto;
+  height: 80%;
+  border-radius: 6px;
+  box-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
 @keyframes moveInTop {
