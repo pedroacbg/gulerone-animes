@@ -664,9 +664,16 @@ a {
 .u-trailer-img {
   display: block;
   margin: 0 auto;
-  height: 80%;
+  height: 70%;
   border-radius: 6px;
   box-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.u-myanimelist {
+  height: 1.8rem;
+  display: block;
+  margin: 0 auto;
+  border-radius: 3px 3px 0 0;
 }
 
 @keyframes moveInTop {

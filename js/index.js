@@ -108,7 +108,7 @@ const showAnimeDetails = function (data) {
                   </h2>
                   <h3>Episodes: <span> ${data.episodes}</span></h3>
                   <h3>Source: <span> ${data.source}</span></h3>
-                  <h3>Genre: <span> ${data.genres[0].name} </span></h3>
+                  <h3>Genre: <span> ${data.genres[0]?.name} </span></h3>
                   <h3>Aired: <span> ${data.aired.string} </span></h3>
                   <h3>Duration: <span> ${data.duration} </span></h3>
                   <h3>Year: <span> ${data.year} </span></h3>
@@ -142,22 +142,31 @@ const showAnimeDetails = function (data) {
                           ? "Trailer"
                           : "Anime Image & More Info"
                       }</h2>
-                      <a
-                        href="${data.trailer.url ? data.trailer.url : data.url}"
-                        target="_blank"
-                      >
-                        <img
-                          src="${
-                            data.trailer.images.maximum_image_url
-                              ? data.trailer.images.maximum_image_url
-                              : data.images.jpg.large_image_url
+                        <a
+                          href="${
+                            data.trailer.url ? data.trailer.url : data.url
                           }"
-                          alt="Trailer Image"
-                          class="${
-                            data.trailer.url ? "trailer--img" : "u-trailer-img"
-                          }"
-                      />
-                      </a>
+                          target="_blank"
+                        >
+                          <img 
+                            src="../img/myanimelist.png" 
+                            alt="MyAnimeList logo" class="${
+                              data.trailer.url ? "u-hidden" : "u-myanimelist"
+                            }"/>
+                          <img
+                            src="${
+                              data.trailer.images.maximum_image_url
+                                ? data.trailer.images.maximum_image_url
+                                : data.images.jpg.large_image_url
+                            }"
+                            alt="Trailer Image"
+                            class="${
+                              data.trailer.url
+                                ? "trailer--img"
+                                : "u-trailer-img"
+                            }"
+                        />
+                        </a>
                     </div>
                   </div>
                   <div class="container__anime--right-secondary">
@@ -174,12 +183,12 @@ const showAnimeDetails = function (data) {
                       <h3>Members: <span> ${data.members} users</span></h3>
                       <h3>Season: <span> ${data.season} users</span></h3>
                       <h3>Broadcast: <span> ${data.broadcast.string}</span></h3>
-                      <h3>Studio: <span> ${data.studios[0].name} </span></h3>
+                      <h3>Studio: <span> ${data.studios[0]?.name} </span></h3>
                       <h3>Rating: <span> ${data.rating} </span></h3>
                       <h3>Type: <span> ${data.type} </span></h3>
-                      <h3>Theme: <span> ${data.themes[0].name} </span></h3>
+                      <h3>Theme: <span> ${data.themes[0]?.name} </span></h3>
                       <h3>Demographic: <span> ${
-                        data.demographics[0].name
+                        data.demographics[0]?.name
                       } </span></h3>
                     </div>
                   </div>
