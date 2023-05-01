@@ -15,14 +15,17 @@
   <body>
     <header class="header">
       <nav class="nav__content">
-        <img
-          src="img/nav-img.png"
-          alt="Navbar anime image"
-          class="nav__content--img"
-        />
-        <a href="#">
-          <h1 class="nav__content--title">Gulerone Animes</h1>
-        </a>
+        <div class="nav__content--logo">
+          <img
+            src="img/nav-img.png"
+            alt="Navbar anime image"
+            class="nav__content--img"
+          />
+          <a href="#">
+            <h1 class="nav__content--title">Gulerone Animes</h1>
+          </a>
+        </div>
+
         <form class="search">
           <input
             type="text"
@@ -32,7 +35,7 @@
           />
           <button type="submit">Search</button>
         </form>
-        <ul>
+        <ul class="nav__content--list">
           <li class="nav__content--item">
             <a href="https://github.com/pedroacbg" target="_blank">
               <i class="fa-brands fa-github fa-4x"></i>
@@ -44,6 +47,11 @@
             </a>
           </li>
         </ul>
+        <div class="menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
       </nav>
     </header>
     <main>

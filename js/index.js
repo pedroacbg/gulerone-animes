@@ -5,12 +5,21 @@ const pagination = document.querySelector(".pagination");
 const pageTitle = document.querySelector(".nav__content--title");
 const animePageContainer = document.querySelector(".container__anime");
 const errorContainer = document.querySelector(".error__box");
+const menu = document.querySelector(".menu");
+const navContentList = document.querySelector(".nav__content--list");
 
 let allData;
+
+menu.addEventListener("click", function () {
+  menu.classList.toggle("active");
+  searchForm.classList.toggle("active");
+  navContentList.classList.toggle("active");
+});
 
 pageTitle.addEventListener("click", function () {
   pagination.classList.add("u-hidden");
   resultContainer.classList.add("u-hidden");
+  animePageContainer.classList.add("u-hidden");
 });
 
 const getInputValue = function (event) {
@@ -18,6 +27,9 @@ const getInputValue = function (event) {
   const searchData = searchForm.search.value;
   fetchSearch(searchData);
   searchForm.search.value = "";
+  menu.classList.remove("active");
+  searchForm.classList.remove("active");
+  navContentList.classList.remove("active");
 };
 
 searchForm.addEventListener("submit", getInputValue);

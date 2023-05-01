@@ -37,53 +37,53 @@ ul {
   list-style: none;
 }
 
-/* Header */
-
-nav {
-  display: flex;
-  align-items: center;
-  padding: 0 10rem;
-}
-
 a {
   text-decoration: none;
   cursor: pointer;
 }
 
-.header {
-  box-shadow: 2px 4px 4px rgba(0, 3, 7, 0.3);
-}
+/* Header */
 
-.nav__content {
+.header {
   background-image: linear-gradient(
     to right bottom,
     var(--color-primary-light),
     var(--color-primary-dark)
   );
+  box-shadow: 2px 4px 4px rgba(0, 3, 7, 0.3);
+}
+
+.nav__content {
+  min-height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6rem;
+}
+
+.nav__content--logo {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 .nav__content--title {
   font-size: 2.5rem;
+  white-space: nowrap;
   color: white;
   text-transform: uppercase;
   font-weight: 400;
-  padding-right: 15rem;
   text-shadow: 2px 4px 4px rgba(0, 3, 7, 0.6);
 }
 
 .nav__content--img {
   height: 10rem;
-  padding-right: 5rem;
 }
 
 .nav__content ul {
   display: flex;
-  flex-direction: row;
-  padding-left: 15rem;
-}
-
-.nav__content--item {
-  padding: 0 5rem;
+  align-items: center;
+  gap: 10rem;
 }
 
 .fa-brands {
@@ -125,6 +125,21 @@ a {
 .search button:is(:hover, :focus) {
   background-color: white;
   color: var(--color-primary-dark-2);
+}
+
+.menu {
+  display: none;
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 2.8rem;
+  height: 0.3rem;
+  border-radius: 2px;
+  margin: 0.5rem auto;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Anime search results section */
@@ -515,15 +530,14 @@ a {
 
   .nav__content--title {
     font-size: 2rem;
-    white-space: nowrap;
   }
 
   .nav__content ul {
-    padding-left: 10rem;
+    gap: 3rem;
   }
 
   .search {
-    width: 90rem;
+    width: 50rem;
   }
 
   .container {
@@ -536,22 +550,62 @@ a {
 }
 
 @media (max-width: 1100px) {
-  .nav__content {
-    justify-content: space-between;
-  }
-
-  .nav__content ul {
-    display: none;
-  }
-
-  .container {
-    max-width: 100rem;
+  .search {
+    width: 30rem;
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
+  .menu {
+    display: block;
+  }
+
+  .menu.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .menu.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .search,
+  .nav__content--list {
+    position: fixed;
+    left: -100%;
+    gap: 0;
+    border-radius: 0 0 3px 3px;
+    background-color: var(--color-primary-light);
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    transition: 0.4s;
+  }
+
+  .search {
+    top: 8rem;
+  }
+
+  .nav__content--list {
+    height: 5rem;
+    top: 12rem;
+  }
+
+  .nav__content--item {
+    margin: 1.6rem 0;
+  }
+
+  .search.active,
+  .nav__content--list.active {
+    left: 0;
+  }
+
   .nav__content {
-    padding: 0 1rem;
+    min-height: 8rem;
   }
 
   .container {
@@ -582,15 +636,6 @@ a {
 @media (max-width: 600px) {
   .nav__content--title {
     font-size: 1.4rem;
-  }
-
-  .search {
-    border: none;
-    background-color: transparent;
-  }
-
-  .search input {
-    visibility: hidden;
   }
 
   .container {
@@ -664,7 +709,7 @@ a {
 .u-trailer-img {
   display: block;
   margin: 0 auto;
-  height: 70%;
+  height: 60%;
   border-radius: 6px;
   box-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2);
 }
