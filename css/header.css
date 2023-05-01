@@ -1,0 +1,99 @@
+/* Header */
+
+.header {
+  background-image: linear-gradient(
+    to right bottom,
+    var(--color-primary-light),
+    var(--color-primary-dark)
+  );
+  box-shadow: 2px 4px 4px rgba(0, 3, 7, 0.3);
+}
+
+.nav__content {
+  min-height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6rem;
+}
+
+.nav__content--logo {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav__content--title {
+  font-size: 2.5rem;
+  white-space: nowrap;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 400;
+  text-shadow: 2px 4px 4px rgba(0, 3, 7, 0.6);
+}
+
+.nav__content--img {
+  height: 10rem;
+}
+
+.nav__content ul {
+  display: flex;
+  align-items: center;
+  gap: 10rem;
+}
+
+.fa-brands {
+  color: white;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  width: 60rem;
+  padding: 0.2rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.367);
+  border-radius: 6px;
+}
+
+.search input {
+  width: 90%;
+  height: 3.5rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: black;
+  font-size: 1.5rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.search button {
+  background-color: var(--color-primary-dark-2);
+  color: white;
+  outline: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search button:is(:hover, :focus) {
+  background-color: white;
+  color: var(--color-primary-dark-2);
+}
+
+.menu {
+  display: none;
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 2.8rem;
+  height: 0.3rem;
+  border-radius: 2px;
+  margin: 0.5rem auto;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+}

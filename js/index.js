@@ -7,19 +7,27 @@ const animePageContainer = document.querySelector(".container__anime");
 const errorContainer = document.querySelector(".error__box");
 const menu = document.querySelector(".menu");
 const navContentList = document.querySelector(".nav__content--list");
+const loading = document.querySelector(".loading");
+const prevButton = document.getElementById("prevButton");
+const nextButton = document.getElementById("nextButton");
+const pageNumber = document.querySelector(".page--number");
 
 let allData;
+let pageSize = 12;
+let currentPage = 1;
 
 menu.addEventListener("click", function () {
   menu.classList.toggle("active");
   searchForm.classList.toggle("active");
   navContentList.classList.toggle("active");
+  loading.classList.toggle("active");
 });
 
 pageTitle.addEventListener("click", function () {
   pagination.classList.add("u-hidden");
   resultContainer.classList.add("u-hidden");
   animePageContainer.classList.add("u-hidden");
+  loading.classList.remove("u-hidden");
 });
 
 const getInputValue = function (event) {
@@ -30,6 +38,9 @@ const getInputValue = function (event) {
   menu.classList.remove("active");
   searchForm.classList.remove("active");
   navContentList.classList.remove("active");
+  loading.classList.add("u-hidden");
+  animePageContainer.classList.add("u-hidden");
+  pagination.classList.add("u-hidden");
 };
 
 searchForm.addEventListener("submit", getInputValue);
@@ -43,6 +54,7 @@ const fetchSearch = async function (searchData) {
     if (!allData.data.length <= 0) {
       showSearchResults(allData.data);
       errorContainer.classList.add("u-hidden");
+      return allData.data;
     }
     if (allData.data.length === 0) {
       showError();
@@ -54,10 +66,31 @@ const fetchSearch = async function (searchData) {
   }
 };
 
-const showSearchResults = function (data) {
+const showSearchResults = function (data, page = 1) {
+  if (page == 1) {
+    prevButton.style.visibility = "hidden";
+  } else {
+    prevButton.style.visibility = "visible";
+  }
+
+  if (page == numPages()) {
+    nextButton.style.visibility = "hidden";
+    prevButton.style.visibility = "visible";
+  } else {
+    nextButton.style.visibility = "visible";
+  }
+
   resultList.innerHTML = "";
-  data.forEach((item) => {
-    const element = `
+
+  data
+    .filter((item, index) => {
+      let start = (currentPage - 1) * pageSize;
+      let finish = currentPage * pageSize;
+
+      if (index >= start && index < finish) return true;
+    })
+    .forEach((item) => {
+      const element = `
             <div class="container__content--box" >
               <div class="container__content--item" data-id="${item.mal_id}">
                 <h3 class="content__container--title" >${item.title}</h3>
@@ -71,11 +104,35 @@ const showSearchResults = function (data) {
               </div>
             </div>
     `;
-    resultList.insertAdjacentHTML("beforeend", element);
-  });
+      resultList.insertAdjacentHTML("beforeend", element);
+    });
+
   pagination.classList.remove("u-hidden");
   resultContainer.classList.remove("u-hidden");
 };
+
+const previousPage = function () {
+  if (currentPage > 1) {
+    currentPage--;
+    pageNumber.textContent = `Page ${currentPage}`;
+    showSearchResults(allData.data, currentPage);
+  }
+};
+
+const nextPage = function () {
+  if (currentPage * pageSize < allData.data.length) {
+    currentPage++;
+    pageNumber.textContent = `Page ${currentPage}`;
+    showSearchResults(allData.data, currentPage);
+  }
+};
+
+function numPages() {
+  return Math.ceil(allData.data.length / pageSize);
+}
+
+prevButton.addEventListener("click", previousPage, false);
+nextButton.addEventListener("click", nextPage, false);
 
 const showError = function () {
   errorContainer.classList.remove("u-hidden");
@@ -211,4 +268,5 @@ const showAnimeDetails = function (data) {
   animePageContainer.insertAdjacentHTML("afterbegin", element);
   pagination.classList.add("u-hidden");
   resultContainer.classList.add("u-hidden");
+  loading.classList.add("u-hidden");
 };
