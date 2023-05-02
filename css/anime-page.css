@@ -2,9 +2,27 @@
 .container__anime {
   padding-top: 2rem;
   background-color: #f9f5f3;
+  position: relative;
+}
+
+.return--btn {
+  display: block;
+  position: absolute;
+  top: 2rem;
+  left: 10rem;
+  color: var(--color-primary-dark);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.return--btn:hover {
+  color: var(--color-primary-dark-2);
+  text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6);
+  transform: translateY(-0.3rem);
 }
 
 .container__anime--name {
+  display: inline-block;
   font-size: 3rem;
   color: var(--color-primary-dark-2);
   padding-bottom: 2rem;

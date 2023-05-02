@@ -13,6 +13,7 @@ const nextButton = document.getElementById("nextButton");
 const pageNumber = document.querySelector(".page--number");
 
 let allData;
+let currentSearchInput;
 let pageSize = 12;
 let currentPage = 1;
 
@@ -33,7 +34,9 @@ pageTitle.addEventListener("click", function () {
 const getInputValue = function (event) {
   event.preventDefault();
   const searchData = searchForm.search.value;
-  fetchSearch(searchData);
+  const search = searchData.replaceAll(" ", "-").toLowerCase();
+  fetchSearch(search);
+  currentSearchInput = search;
   searchForm.search.value = "";
   menu.classList.remove("active");
   searchForm.classList.remove("active");
@@ -45,8 +48,7 @@ const getInputValue = function (event) {
 
 searchForm.addEventListener("submit", getInputValue);
 
-const fetchSearch = async function (searchData) {
-  const search = searchData.replaceAll(" ", "-").toLowerCase();
+const fetchSearch = async function (search) {
   const url = `https://api.jikan.moe/v4/anime?q=${search}&sfw`;
   try {
     const response = await fetch(url);
@@ -54,6 +56,7 @@ const fetchSearch = async function (searchData) {
     if (!allData.data.length <= 0) {
       showSearchResults(allData.data);
       errorContainer.classList.add("u-hidden");
+      animePageContainer.classList.add("u-hidden");
       return allData.data;
     }
     if (allData.data.length === 0) {
@@ -150,6 +153,9 @@ const showAnimeDetails = function (data) {
   animePageContainer.classList.remove("u-hidden");
   animePageContainer.innerHTML = "";
   const element = `
+            <button class="return--btn">
+              <i class="fa-solid fa-rotate-left fa-4x"></i>
+            </button>
             <div class="u-center-text">
               <h2 class="container__anime--name">${data.title}</h2>
             </div>
@@ -265,8 +271,17 @@ const showAnimeDetails = function (data) {
               </div>
             </div>
   `;
+
   animePageContainer.insertAdjacentHTML("afterbegin", element);
+
+  const returnButton = document.querySelector(".return--btn");
+  returnButton.addEventListener("click", returnButtonHandler);
+
   pagination.classList.add("u-hidden");
   resultContainer.classList.add("u-hidden");
   loading.classList.add("u-hidden");
+};
+
+const returnButtonHandler = function () {
+  fetchSearch(currentSearchInput);
 };
